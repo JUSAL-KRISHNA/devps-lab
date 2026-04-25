@@ -19,9 +19,11 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
 
-      - name: Build and push
+            - name: Build and push
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
-          tags: ${{ vars.DOCKER_USERNAME }}/devps-lab:latest
+          # This line checks both Secrets and Variables for your username
+          tags: ${{ secrets.DOCKER_USERNAME || vars.DOCKER_USERNAME }}/devps-lab:latest
+
